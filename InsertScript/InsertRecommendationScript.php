@@ -15,7 +15,7 @@
     	exit();
 	}
 	$query = "INSERT INTO Recommedations (TicketKod, DiagnoseKod, Therapy, Complaints, Historyillness, ObjectiveValues) VALUES ('$ticketKod', 
-		'$diagnoseKod', '$therapy', '$complaints', '$historyIllness' 'objectiveValues')";
+		'$diagnoseKod', '$therapy', '$complaints', '$historyIllness', 'objectiveValues')";
 	$mysqli->query($query);
 
 	printf ("ID новой записи: %d.\n", $mysqli->insert_id);
