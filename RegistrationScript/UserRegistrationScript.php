@@ -1,7 +1,7 @@
 <?php
     $data = file_get_contents('php://input');
     $json = json_decode($data);
-    $login = $json->{'login'};
+    $login = $json->{'email'};
     $password = $json->{'password'};
     $fullName = $json->{'fullName'};
     $profileKod = $json->{'profileKod'};
@@ -22,13 +22,13 @@
     $login = trim($login);
     $password = trim($password);
     // подключаемся к базе
-    $result = $mysqli->query("SELECT * from UserRegistrations where Login = '$login' and Password = '$password'");
+    $result = $mysqli->query("SELECT * from UserRegistrations where Email = '$email' and Password = '$password'");
     $myrow = mysql_fetch_array($result);
     if (!empty($myrow['idUserRegistration'])){
         exit ("Извините, введённый вами логин уже зарегистрирован. Введите другой логин.");
     }
     // если такого нет, то сохраняем данные
-    $resultInsert = $mysqli->query("INSERT INTO UserRegistrations (FullName, Login, Password, ProfileKod) VALUES('$fullName', '$login', '$password', '$profileKod')");
+    $resultInsert = $mysqli->query("INSERT INTO UserRegistrations (FullName, Email, Password, ProfileKod) VALUES('$fullName', '$email', '$password', '$profileKod')");
     // Проверяем, есть ли ошибки
     if ($resultInsert=='TRUE'){
         echo "Вы успешно зарегистрированы! Теперь вы можете зайти на сайт. <a href='index.php'>Главная страница</a>";
